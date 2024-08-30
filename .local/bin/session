@@ -1,7 +1,0 @@
-#!/bin/env bash
-
-for i in {1..9}; do
-    i3-resurrect $1 -n -w $i
-done
-
-i3-resurrect $1 -w __i3_scratch

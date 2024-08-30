@@ -10,11 +10,9 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-# Install xdotool, notify-osd and wmctrl for `zsh-notify` to work
 zinit wait silent for \
     Aloxaf/fzf-tab \
     agkozak/zsh-z
-    # marzocchi/zsh-notify \
 
 zinit ice depth=1 atload'!source ~/.config/zsh/.p10k.zsh' lucid nocd
 zinit light romkatv/powerlevel10k
@@ -29,13 +27,12 @@ zinit wait lucid for \
 
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Load fzf after vi-mode to prevent vi-mode from overwriting shortcuts of fzf
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 autoload -Uz bashcompinit && bashcompinit
 
 ## History file configuration
-[ -z "$HISTFILE" ] && HISTFILE="$HOME/.config/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 
@@ -57,16 +54,19 @@ bindkey "^[[1;5D" backward-word
 
 # General environment variables 
 # Put other environment variables into .zshenv
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore-vcs --full-path --type file --follow --exclude {.git,.cache}'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 export FZF_ALT_C_COMMAND='fd --hidden --no-ignore-vcs --full-path --type directory --follow --exclude {.git,.cache}'
 
 alias ls='ls --color=auto'
-alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 alias ssh='env TERM=xterm-256color ssh'
-alias vim='nvim'
 
 open() { xdg-open "$@" &> /dev/null &; disown; }
-
 
