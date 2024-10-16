@@ -48,6 +48,7 @@ setopt auto_menu
 setopt always_to_end
 setopt complete_in_word
 setopt autocd
+setopt magic_equal_subst  # Allow completions if they are structured like `opt=argument`
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
