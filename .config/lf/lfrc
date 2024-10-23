@@ -1,0 +1,15 @@
+
+set filesep " \n"  # Add a space to filesep in $fx buffer so things remain separated even when newlines are stripped (like in `yank`)
+
+map y  # Unmap default binding for copy
+map yy copy  # Remap it
+map yp :yank_path; unselect  # Copy path then unselect
+
+map c
+map c :unselect; clear  # Clear both selections (via space), and files marked for copy/move/cut (via y/c/d)
+
+# Copy paths,
+# - if files are selected, then copy all their paths
+# - otherwise the path of the current file under the cursor
+cmd yank_path ${{ printf '%s' "$fx" | yank &> /dev/null }}
+
