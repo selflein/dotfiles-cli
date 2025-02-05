@@ -12,3 +12,4 @@
 * [Zinit](https://github.com/zdharma/zinit) (Plugin manager for zsh)
 * [vim-plug](https://github.com/junegunn/vim-plug) (Plugin manager for vim)
 * [TPM](https://github.com/tmux-plugins/tpm) (Pugin manager for tmux)
+* [ncdu](https://dev.yorhel.nl/ncdu) (byte hunting)
